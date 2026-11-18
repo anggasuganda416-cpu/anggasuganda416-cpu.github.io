@@ -1,0 +1,1822 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#171512">
+<title>Angga Suganda — Visual Archive</title>
+<meta name="description" content="Angga Suganda — Video Editor & Motion Designer. Visual stories, crafted through motion.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  .frame {
+  aspect-ratio: auto !important;
+  height: auto !important;
+}
+
+.frame img,
+.frame video {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  object-fit: contain;
+}
+  
+ /* SHOWREEL FRAME FIX */
+.reel .frame {
+  aspect-ratio: 21 / 9 !important;
+  min-height: 220px;
+  height: auto !important;
+  overflow: hidden;
+} 
+
+  /* HIDE SHOWREEL PLAY ICON */
+.reel .play {
+  display: none !important;
+}
+  
+:root {
+  --bg: #171512;
+  --panel: #211e19;
+  --orange: #e66b3d;
+  --cream: #e9dfca;
+  --muted: #a99c87;
+  --line: rgba(233,223,202,.2);
+  --sans: 'DM Sans', sans-serif;
+  --display: 'Anton', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+/* FILM GRAIN */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 100;
+  pointer-events: none;
+  opacity: .10;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  animation: grain .3s steps(2) infinite;
+}
+
+@keyframes grain {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(2%,-2%); }
+  50% { transform: translate(-2%,2%); }
+  75% { transform: translate(1%,2%); }
+  100% { transform: translate(-1%,-1%); }
+}
+
+
+/* XIQUDA — AFTER EFFECTS STYLE INTRO */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #100f0d;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  overflow: hidden;
+  animation: introExit 1.4s cubic-bezier(.76,0,.24,1) 4.2s forwards;
+}
+
+/* CINEMATIC LIGHT */
+.intro::before {
+  content: "";
+  position: absolute;
+  width: 45vw;
+  height: 45vw;
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(230,107,61,.13),
+    transparent 70%
+  );
+  animation: lightPulse 3s ease-in-out infinite alternate;
+}
+
+/* MAIN TYPOGRAPHY */
+.intro span {
+  position: relative;
+  z-index: 2;
+  color: #e9dfca;
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(4rem, 13vw, 9rem);
+  line-height: .9;
+  letter-spacing: .22em;
+  padding-left: .22em;
+  opacity: 0;
+  filter: blur(18px);
+  transform: translateY(45px) scale(1.08);
+  animation: logoReveal 1.8s cubic-bezier(.16,1,.3,1) .35s forwards;
+}
+
+/* SUBTITLE */
+.intro i {
+  position: relative;
+  z-index: 2;
+  color: #e66b3d;
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(.55rem, 1.2vw, .75rem);
+  font-style: normal;
+  letter-spacing: .55em;
+  padding-left: .55em;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(15px);
+  animation: subtitleReveal 1.3s cubic-bezier(.16,1,.3,1) 1.15s forwards;
+}
+
+/* LOGO ANIMATION */
+@keyframes logoReveal {
+  0% {
+    opacity: 0;
+    filter: blur(18px);
+    transform: translateY(45px) scale(1.08);
+    letter-spacing: .22em;
+  }
+
+  65% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(-5px) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+    letter-spacing: .08em;
+  }
+}
+
+/* SUBTITLE ANIMATION */
+@keyframes subtitleReveal {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(15px);
+    letter-spacing: .55em;
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+    letter-spacing: .3em;
+  }
+}
+
+/* BACKGROUND LIGHT */
+@keyframes lightPulse {
+  from {
+    transform: scale(.8);
+    opacity: .5;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* CINEMATIC EXIT */
+@keyframes introExit {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.06);
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro,
+  .intro span,
+  .intro i,
+  .intro::before {
+    animation: none;
+  }
+
+  .intro {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+  /* NAVIGATION */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 6%;
+  background: linear-gradient(#171512 20%, rgba(23,21,18,.88), transparent);
+  backdrop-filter: blur(5px);
+}
+
+.brand {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  letter-spacing: .04em;
+}
+
+.brand span {
+  color: var(--orange);
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+  font-family: var(--mono);
+  font-size: .7rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+nav a {
+  transition: color .3s;
+}
+
+nav a:hover {
+  color: var(--orange);
+}
+
+/* GENERAL */
+
+section {
+  padding: 120px 6%;
+}
+
+.wrap {
+  max-width: 1250px;
+  margin: auto;
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--orange);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(3rem,8vw,7rem);
+  line-height: .95;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.lede {
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.8;
+  margin-bottom: 55px;
+}
+
+/* HERO */
+
+#top {
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 145px 6% 65px;
+  background:
+    radial-gradient(ellipse at 50% 40%, #34271e 0%, #211c17 42%, #171512 80%);
+}
+
+#top::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .15;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    rgba(255,255,255,.12) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+#top::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse, transparent 40%, rgba(0,0,0,.55));
+}
+
+.hud {
+  position: absolute;
+  z-index: 2;
+  top: 110px;
+  left: 6%;
+  right: 6%;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--muted);
+  letter-spacing: .1em;
+}
+
+.rec {
+  color: var(--orange);
+}
+
+.rec i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  margin-right: 8px;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: .2; }
+}
+
+.hero {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  text-align: center;
+}
+
+.hero-kicker {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--cream);
+  letter-spacing: .2em;
+  margin-bottom: 25px;
+  animation: reveal .9s .1s both;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(5rem,16vw,13rem);
+  line-height: .78;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+}
+
+.hero h1 > span {
+  display: block;
+  color: var(--orange);
+  animation: titleIn 1.2s cubic-bezier(.16,1,.3,1) both;
+}
+
+.hero h1 > span:nth-child(2) {
+  color: var(--cream);
+  animation-delay: .18s;
+}
+
+.hero h1 .letter {
+  display: inline-block !important;
+  color: inherit !important;
+  animation: letterRise .85s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(var(--i) * .035s);
+}
+
+@keyframes titleIn {
+  from {
+    opacity: 0;
+    transform: translateY(90px) scale(.95);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* VHS CASSETTE */
+
+.vhs {
+  position: relative;
+  width: min(65%, 460px);
+  aspect-ratio: 1.8;
+  margin: 42px auto;
+  background: linear-gradient(145deg,#777064,#38332b 60%,#61584a);
+  border: 5px solid #918573;
+  border-radius: 12px;
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.5),
+    inset 0 0 0 3px #38332c;
+  transform: rotate(-7deg);
+  animation: tapeIn 1.5s .3s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes tapeIn {
+  from {
+    opacity: 0;
+    transform: translateY(80px) rotate(10deg) scale(.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(-7deg) scale(1);
+  }
+}
+
+.vhs::before,
+.vhs::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: rgba(255,255,255,.13);
+}
+
+.vhs::before { left: 8px; }
+.vhs::after { right: 8px; }
+
+.vhs-window {
+  position: absolute;
+  top: 27%;
+  width: 17%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 7px solid #c4b69e;
+  background: repeating-conic-gradient(
+    #29251f 0 12deg,
+    #817663 12deg 24deg
+  );
+  box-shadow: inset 0 0 0 5px #40392f;
+}
+
+.vhs-window.left { left: 7%; }
+.vhs-window.right { right: 7%; }
+
+.vhs-label {
+  position: absolute;
+  top: 22%;
+  bottom: 22%;
+  left: 27%;
+  right: 27%;
+  background: #e7dcc4;
+  border: 2px solid #a99471;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #29251f;
+  transform: rotate(-2deg);
+}
+
+.vhs-label strong {
+  font-family: var(--display);
+  font-size: clamp(.7rem,2.4vw,1.3rem);
+}
+
+.vhs-label small {
+  font-family: var(--mono);
+  font-size: clamp(.4rem,1vw,.65rem);
+  margin-top: 5px;
+}
+
+.hero-bottom {
+  max-width: 700px;
+  margin: 35px auto 0;
+  animation: reveal 1s 1s both;
+}
+
+.hero-bottom h2 {
+  font-family: var(--display);
+  font-size: clamp(2.5rem,7vw,5.5rem);
+  font-weight: 400;
+  line-height: .95;
+  margin-bottom: 20px;
+}
+
+.hero-bottom p {
+  max-width: 550px;
+  margin: auto;
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: .95rem;
+}
+
+.hero-meta {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-top: 55px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .1em;
+  animation: reveal 1s 1.2s both;
+}
+
+.cta {
+  display: inline-block;
+  border: 1px solid var(--cream);
+  padding: 14px 25px;
+  margin-top: 28px;
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  transition: .3s;
+}
+
+.cta:hover {
+  color: var(--bg);
+  background: var(--cream);
+}
+
+/* SHOWREEL */
+
+.reel {
+  display: block;
+  width: 100%;
+  position: relative;
+  border: 0;
+  background: #080706;
+  color: var(--cream);
+  cursor: pointer;
+  text-align: left;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21/9;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 70% 40%,rgba(200,100,50,.35),transparent 50%),
+    linear-gradient(130deg,#17130f,#080706);
+}
+
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 2px,
+    rgba(255,255,255,.06) 3px
+  );
+}
+
+.frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 3;
+  background: #000;
+}
+
+.play {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 70px;
+  height: 70px;
+  border: 1px solid var(--cream);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  padding-left: 4px;
+  transition: .3s;
+}
+
+.reel:hover .play {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+.frame-label {
+  position: absolute;
+  z-index: 4;
+  left: 22px;
+  right: 22px;
+  bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .1em;
+}
+
+/* PROJECTS */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  gap: 50px 25px;
+}
+
+.project {
+  grid-column: span 6;
+  display: block;
+  border: 0;
+  color: var(--cream);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  min-width: 0;
+}
+
+.project:nth-child(2) {
+  margin-top: 100px;
+}
+
+.project:nth-child(n+3) {
+  grid-column: span 4;
+}
+
+.project .frame {
+  aspect-ratio: 16/10;
+  transition: .5s;
+}
+
+.project:nth-child(2) .frame {
+  aspect-ratio: 4/5;
+}
+
+.project .frame video {
+  object-fit: cover;
+}
+
+.project:hover .frame {
+  box-shadow: 0 15px 35px rgba(0,0,0,.35);
+}
+
+.project h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.5rem,3vw,2.5rem);
+  margin-top: 17px;
+  text-transform: uppercase;
+}
+
+.project p {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-top: 5px;
+}
+
+.project .frame-label {
+  pointer-events: none;
+}
+
+/* PROJECT BACKGROUNDS */
+
+.a1 {
+  background: radial-gradient(circle at 30% 40%,#8c392a,transparent 55%),#17110f;
+}
+
+.a2 {
+  background: radial-gradient(circle at 60% 40%,#78644b,transparent 55%),#121412;
+}
+
+.a3 {
+  background: radial-gradient(circle at 60% 40%,#5b4a39,transparent 55%),#11100e;
+}
+
+.a4 {
+  background: radial-gradient(circle at 40% 40%,#66506e,transparent 55%),#111014;
+}
+
+.a5 {
+  background: radial-gradient(circle at 50% 50%,#55664a,transparent 55%),#10110e;
+}
+
+/* GRAPHIC DESIGN */
+
+.design-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 25px;
+  align-items: end;
+}
+
+.design-card .frame {
+  aspect-ratio: 3/4;
+}
+
+.design-card:nth-child(2) .frame {
+  aspect-ratio: 16/10;
+}
+
+.design-card:nth-child(3) .frame {
+  aspect-ratio: 1;
+}
+
+.design-card figcaption {
+  margin-top: 14px;
+  font-size: .9rem;
+}
+
+.design-card figcaption span {
+  display: block;
+  color: var(--muted);
+  font-size: .8rem;
+  margin-top: 4px;
+}
+
+.d1 {
+  background: linear-gradient(180deg,#211913 50%,#9b4a2b 50%,#171512 53%);
+}
+
+.d1::before {
+  content: "REWIND";
+  position: absolute;
+  z-index: 2;
+  top: 15%;
+  left: 10%;
+  font-family: var(--display);
+  color: var(--cream);
+  font-size: clamp(2rem,5vw,4rem);
+}
+
+.d2 {
+  background: radial-gradient(ellipse at center,#b36b43,transparent 55%),#211b15;
+}
+
+.d3 {
+  background: repeating-linear-gradient(45deg,#332b21 0 3px,#171512 3px 10px);
+}
+
+/* ABOUT */
+
+.about {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 80px;
+}
+
+.about-copy p {
+  max-width: 600px;
+  color: var(--muted);
+  line-height: 2;
+  margin-bottom: 20px;
+}
+
+.skills h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.skills ul {
+  list-style: none;
+  margin-bottom: 40px;
+}
+
+.skills li {
+  border-top: 1px solid var(--line);
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: .88rem;
+}
+
+.skills li span {
+  color: var(--muted);
+  text-align: right;
+}
+
+/* CONTACT */
+
+.contact-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding: 25px 0;
+  transition: .3s;
+}
+
+.contact-list a:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-list a:hover {
+  padding-left: 15px;
+  color: var(--orange);
+}
+
+.contact-list small {
+  font-family: var(--mono);
+  color: var(--muted);
+  font-size: .7rem;
+}
+
+.contact-list strong {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.5rem,4vw,3rem);
+}
+
+footer {
+  padding: 30px 6%;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--mono);
+  color: var(--muted);
+  font-size: .65rem;
+}
+
+/* SCROLL REVEAL */
+
+.rv {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .9s ease, transform .9s cubic-bezier(.16,1,.3,1);
+}
+
+.rv.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+  
+/* CINEMATIC FRAME REVEAL */
+
+.rv .frame {
+  clip-path: inset(0 50% 0 50%);
+  transform: scale(.88);
+  opacity: .5;
+
+  transition:
+    clip-path 1.1s cubic-bezier(.16,1,.3,1),
+    transform 1.1s cubic-bezier(.16,1,.3,1),
+    opacity .8s ease;
+}
+
+.rv.in .frame {
+  clip-path: inset(0 0 0 0);
+  transform: scale(1);
+  opacity: 1;
+}
+  
+/* LETTER BY LETTER TYPOGRAPHY */
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+/* HERO: SMOOTH RISE */
+.letters-go.letter-rise .letter {
+  animation: letterRise .85s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(var(--i) * .035s);
+}
+
+@keyframes letterRise {
+  from {
+    opacity: 0;
+    transform: translateY(55px) rotateX(-35deg);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    filter: blur(0);
+  }
+}
+
+/* SECTION TITLE: BLUR & SCALE */
+.letters-go.letter-blur .letter {
+  animation: letterBlur .9s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(var(--i) * .025s);
+}
+
+@keyframes letterBlur {
+  from {
+    opacity: 0;
+    transform: scale(1.5);
+    filter: blur(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* HERO BOTTOM: WAVE */
+.letters-go.letter-wave .letter {
+  animation: letterWave .8s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(var(--i) * .045s);
+}
+
+@keyframes letterWave {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) rotate(8deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) rotate(-3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+/* SKILLS: SLIDE */
+.letters-go.letter-slide .letter {
+  animation: letterSlide .7s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(var(--i) * .04s);
+}
+
+@keyframes letterSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+  
+/* HERO TAGLINE — SMOOTH CHARACTER REVEAL */
+.letters-go.letter-tagline .letter {
+  animation: taglineReveal .9s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(var(--i) * .025s);
+}
+
+@keyframes taglineReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px) rotateX(-25deg);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    filter: blur(0);
+  }
+}
+  
+/* CONTACT: TRACKING */
+.letters-go.letter-track .letter {
+  animation: letterTrack .8s ease both;
+  animation-delay: calc(var(--i) * .03s);
+}
+
+@keyframes letterTrack {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+    letter-spacing: .3em;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: normal;
+  }
+}
+
+/* ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+  .letter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* MOBILE */
+
+@media(max-width:800px) {
+  header {
+    padding: 18px 5%;
+  }
+
+  nav {
+    gap: 12px;
+    font-size: .58rem;
+  }
+
+  .brand {
+    font-size: 1.05rem;
+  }
+
+  section {
+    padding: 90px 5%;
+  }
+
+  #top {
+    padding: 140px 5% 45px;
+  }
+
+  .hud {
+    top: 90px;
+    left: 5%;
+    right: 5%;
+    font-size: .55rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(4.5rem,16vw,8rem);
+  }
+
+  .vhs {
+    width: 82%;
+    margin: 35px auto;
+  }
+
+  .hero-meta {
+    font-size: .53rem;
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+  }
+
+  .project:nth-child(2) {
+    margin-top: 0;
+  }
+
+  .project:nth-child(2) .frame {
+    aspect-ratio: 16/10;
+  }
+
+  .design-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .design-card:nth-child(2) .frame,
+  .design-card:nth-child(3) .frame {
+    aspect-ratio: 16/10;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .frame {
+    aspect-ratio: 16/10;
+  }
+}
+
+@media(max-width:430px) {
+  nav {
+    gap: 9px;
+    font-size: .52rem;
+  }
+
+  .brand {
+    font-size: .95rem;
+  }
+
+  .hero h1 {
+    font-size: 17vw;
+  }
+
+  .hero-bottom h2 {
+    font-size: 2.7rem;
+  }
+
+  .vhs {
+    width: 90%;
+  }
+
+  .contact-list a {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html { scroll-behavior: auto; }
+
+  .rv {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- XIQUDA INTRO -->
+<div class="intro" id="intro">
+  <span>XIQUDA.</span>
+  <i>VISUAL ARCHIVE — 001</i>
+</div>
+
+<header>
+  <a class="brand" href="#top">XIQUDA<span>.</span></a>
+
+  <nav aria-label="Primary">
+    <a href="#reel">Reel</a>
+    <a href="#work">Work</a>
+    <a href="#design">Design</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section id="top">
+
+  <div class="hud">
+    <span class="rec"><i></i>REC</span>
+    <span id="tc">00:00:00:00</span>
+    <span>ANALOG ARCHIVE / 001</span>
+  </div>
+
+  <div class="wrap hero">
+
+    <p class="hero-kicker">
+      XIQUDA PRESENTS — CREATIVE ARCHIVE
+    </p>
+
+    <h1>
+      <span>EVERY FRAME</span>
+      <span>TELLS A STORY</span>
+    </h1>
+
+    <div class="vhs">
+      <div class="vhs-window left"></div>
+      <div class="vhs-window right"></div>
+
+      <div class="vhs-label">
+        <strong>XIQUDA</strong>
+        <small>VIDEO EDITOR & GRAPHIC DESIGNER</small>
+        <small>PLAY / REWIND</small>
+      </div>
+    </div>
+
+    <div class="hero-bottom">
+      <h2>CAPTURE THE MOMENT.<br>KEEP THE FEELING.</h2>
+
+      <p>
+        Hello i'm XiQuda. My name is Angga Suganda, a video editor and motion designer
+        who turns raw footage into stories with rhythm,
+        atmosphere, and emotion.
+      </p>
+
+      <a href="#work" class="cta">
+        ENTER THE ARCHIVE →
+      </a>
+    </div>
+
+    <div class="hero-meta">
+      <span>EST. 2019</span>
+      <span>PLEASE REWIND BEFORE RETURNING</span>
+      <span>VOL. 001</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- SHOWREEL -->
+
+<section id="reel">
+  <div class="wrap">
+
+    <p class="label rv">01 / Featured tape</p>
+    <h2 class="section-title rv">THE SHOWREEL</h2>
+
+    <p class="lede rv">
+      A selection of recent edits, cut together as one tape.
+      Rhythm, color and sound first.
+    </p>
+
+    <button class="reel rv" id="reelBtn" type="button"
+      aria-label="Play showreel">
+
+      <div class="frame" id="reelFrame">
+        <div class="play">▶</div>
+
+        <div class="frame-label">
+          <span>PLAY / SHOWREEL</span>
+          <span>SP 00:00:00</span>
+        </div>
+      </div>
+    </button>
+
+    <p class="label" style="margin-top:20px">
+      CINEMATIC EDITS / AMV / MOTION GRAPHICS / SHORT FORM
+    </p>
+
+  </div>
+</section>
+
+<!-- WORK -->
+
+<section id="work">
+  <div class="wrap">
+
+    <p class="label rv">02 / Video collection</p>
+    <h2 class="section-title rv">SELECTED ARCHIVE</h2>
+
+    <p class="lede rv">
+      Five kinds of work, one way of seeing:
+      cut to feeling, paced to sound.
+    </p>
+
+    <div class="grid">
+
+      <button class="project rv" type="button"
+        data-video="assets/videos/AMVProject.mp4">
+
+        <div class="frame a1">
+          <div class="frame-label">
+            <span>TAPE 001</span>
+            <span>AMV PROJECTS</span>
+          </div>
+        </div>
+
+        <h3>AMV Projects</h3>
+        <p>Anime music videos built around beat, transition and character emotion.</p>
+      </button>
+
+      <button class="project rv" type="button"
+        data-video="assets/videos/celenganrindu.mp4">
+
+        <div class="frame a2">
+          <div class="frame-label">
+            <span>TAPE 002</span>
+            <span>CINEMATIC</span>
+          </div>
+        </div>
+
+        <h3>Cinematic Edits</h3>
+        <p>Story-led cuts with considered color, sound design and pacing.</p>
+      </button>
+
+      <button class="project rv" type="button"
+        data-video="assets/videos/XiQudaxBerulah.mp4">
+
+        <div class="frame a3">
+          <div class="frame-label">
+            <span>TAPE 003</span>
+            <span>SHORT FORM</span>
+          </div>
+        </div>
+
+        <h3>Instagram Reels</h3>
+        <p>Vertical, fast and sharp, made to hold attention in seconds.</p>
+      </button>
+
+      <button class="project rv" type="button"
+        data-video="assets/videos/CauseYouHaveTo.mp4">
+
+        <div class="frame a4">
+          <div class="frame-label">
+            <span>TAPE 004</span>
+            <span>MOTION</span>
+          </div>
+        </div>
+
+        <h3>Motion Graphics</h3>
+        <p>Titles, typography and animated identity systems.</p>
+      </button>
+
+      <button class="project rv" type="button"
+        data-video="assets/videos/HBDedits.mp4">
+
+        <div class="frame a5">
+          <div class="frame-label">
+            <span>TAPE 005</span>
+            <span>EXPERIMENTAL</span>
+          </div>
+        </div>
+
+        <h3>Experimental Edits</h3>
+        <p>Glitch, tape artifacts and texture, with no brief to follow.</p>
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN -->
+
+<section id="design">
+  <div class="wrap">
+
+    <p class="label rv">03 / Still collection</p>
+    <h2 class="section-title rv">GRAPHIC DESIGN</h2>
+
+    <p class="lede rv">
+      Still images with the same attention to light,
+      grain and composition.
+    </p>
+
+    <div class="design-grid">
+
+      <figure class="design-card rv">
+        <div class="frame d1">
+          <img src="assets/images/Design Opsi 2.png"
+           alt="Poster Design">
+    </div>
+        <figcaption>
+          Poster Design
+          <span>Typographic, film-inspired layouts</span>
+        </figcaption>
+      </figure>
+
+      <figure class="design-card rv">
+        <div class="frame d2">
+          <img src="assets/images/file_0000000035848211b4fc33c5a091097a (1).png"
+        </div>
+        <figcaption>
+          Thumbnail Design
+          <span>Clear focal point, readable at small sizes</span>
+        </figcaption>
+      </figure>
+
+      <figure class="design-card rv">
+        <div class="frame d3">
+          <img src="assets/images/file_0000000090f48207894c31c73e3f54f6.png"
+        </div>
+        <figcaption>
+          Visual Composition
+          <span>Balance, depth and negative space</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+  <div class="wrap about">
+
+    <div class="about-copy">
+
+      <p class="label rv">04 / Behind the editor</p>
+      <h2 class="section-title rv">BEHIND THE EDIT</h2>
+
+      <p class="rv">
+        I'm Angga Suganda, a video editor and motion designer
+        who turns raw footage into stories with rhythm and atmosphere.
+      </p>
+
+      <p class="rv">
+        My work draws on analog film and VHS texture,
+        paired with clean modern editing. I care about timing,
+        sound and restraint, so every cut has a reason.
+      </p>
+
+      <p class="rv">
+        Available for freelance edits, short-form content
+        and motion design.
+      </p>
+
+    </div>
+
+    <div class="skills rv">
+
+      <h3>Skills</h3>
+
+      <ul>
+        <li>Video editing <span>Narrative, music-driven</span></li>
+        <li>Motion graphics <span>Titles, kinetic type</span></li>
+        <li>Color grading <span>Film looks</span></li>
+        <li>Graphic design <span>Posters, thumbnails</span></li>
+      </ul>
+
+      <h3>Software</h3>
+
+      <ul>
+        <li>Adobe Premiere Pro</li>
+        <li>Adobe After Effects</li>
+        <li>DaVinci Resolve</li>
+        <li>Adobe Photoshop</li>
+        <li>Adobe Illustrator</li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="wrap">
+
+    <p class="label rv">05 / Get in touch</p>
+    <h2 class="section-title rv">LET'S CREATE.</h2>
+
+    <p class="lede rv">
+      Have a project in mind? Send a message and tell me about it.
+    </p>
+
+    <div class="contact-list">
+
+      <a class="rv" href="mailto:anggasuganda416@gmail.com" target="_blank" rel="noopener noreferrer">
+        <small>EMAIL</small>
+        <strong>LET'S TALK ↗</strong>
+      </a>
+
+      <a class="rv" href="https://www.tiktok.com/@xiquda17?_r=1&_t=ZS-9BVCB36kyqz" target="_blank" rel="noopener">
+        <small>TIKTOK / @xiquda17</small>
+        <strong>FOLLOW ↗</strong>
+      </a>
+
+      <a class="rv" href="https://www.upwork.com/freelancers/~01548d10a9d2560195" target="_blank" rel="noopener">
+        <small>FREELANCE PLATFORM</small>
+        <strong>HIRE ME ↗</strong>
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 ANGGA SUGANDA</span>
+  <span>VISUAL STORIES / TIMELESS FRAMES</span>
+</footer>
+
+<script>
+
+/* TIME CODE */
+
+var tc = document.getElementById("tc");
+var startTime = performance.now();
+
+function pad(n) {
+  return String(n).padStart(2,"0");
+}
+
+setInterval(function() {
+  var elapsed = Math.floor((performance.now() - startTime) / 40);
+  var frames = elapsed % 25;
+  var seconds = Math.floor(elapsed / 25);
+
+  tc.textContent =
+    pad(Math.floor(seconds / 3600)) + ":" +
+    pad(Math.floor(seconds / 60) % 60) + ":" +
+    pad(seconds % 60) + ":" +
+    pad(frames);
+
+},80);
+
+
+/* SCROLL REVEAL */
+
+var elements = document.querySelectorAll(".rv");
+
+if ("IntersectionObserver" in window) {
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+
+    entries.forEach(function(entry) {
+
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        revealObserver.unobserve(entry.target);
+      }
+
+    });
+
+  }, {threshold:0.12});
+
+  elements.forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+} else {
+
+  elements.forEach(function(el) {
+    el.classList.add("in");
+  });
+
+}
+
+/* SHOWREEL */
+
+var REEL_URL = "assets/videos/Showreel.mp4";
+
+var reelBtn = document.getElementById("reelBtn");
+var reelFrame = document.getElementById("reelFrame");
+
+var reelVideo = document.createElement("video");
+
+reelVideo.src = REEL_URL;
+reelVideo.muted = true;
+reelVideo.loop = true;
+reelVideo.autoplay = true;
+reelVideo.playsInline = true;
+reelVideo.preload = "auto";
+
+reelFrame.appendChild(reelVideo);
+
+reelVideo.play().catch(function() {});
+
+reelBtn.addEventListener("click", function() {
+
+  document.querySelectorAll("video").forEach(function(v) {
+    v.muted = true;
+  });
+
+  reelVideo.muted = false;
+  reelVideo.controls = true;
+  reelVideo.play().catch(function() {});
+
+});
+  
+/* PROJECT AUTOPLAY PREVIEWS */
+
+var projectObservers = [];
+
+document.querySelectorAll(".project").forEach(function(item) {
+
+  var frame = item.querySelector(".frame");
+  var video = document.createElement("video");
+
+  video.src = item.dataset.video;
+  video.muted = true;
+  video.loop = true;
+  video.autoplay = true;
+  video.playsInline = true;
+  video.preload = "auto";
+
+  frame.appendChild(video);
+
+  var observer = new IntersectionObserver(function(entries) {
+
+    entries.forEach(function(entry) {
+
+      if (entry.isIntersecting) {
+
+        if (!video.controls && !video.ended) {
+          video.play().catch(function() {});
+        }
+
+      } else {
+
+        video.pause();
+
+      }
+
+    });
+
+  }, {threshold:0.3});
+
+  observer.observe(item);
+  projectObservers.push(observer);
+
+/* CLICK TO WATCH FULL VIDEO */
+
+frame.addEventListener("click", function() {
+
+  // Mute semua video lain
+  document.querySelectorAll("video").forEach(function(v) {
+    v.muted = true;
+  });
+
+  // Video yang dipilih punya suara
+  video.muted = false;
+  video.controls = true;
+
+  // Tetap diputar di dalam halaman
+  video.play().catch(function() {});
+
+});
+
+});
+
+/* CINEMATIC INTRO */
+const intro = document.getElementById("introScreen");
+const introTitle = document.getElementById("introTitle");
+
+const introText = "ANGGA SUGANDA PRESENTS — VISUAL COLLECTION";
+
+let introIndex = 0;
+
+function typeIntro() {
+  if (introIndex < introText.length) {
+    introTitle.textContent += introText.charAt(introIndex);
+    introIndex++;
+
+    setTimeout(typeIntro, 65);
+  } else {
+    setTimeout(() => {
+      intro.classList.add("is-leaving");
+      document.body.style.overflow = "";
+    }, 1200);
+  }
+}
+
+document.body.style.overflow = "hidden";
+
+setTimeout(typeIntro, 500);
+function splitLetters(element, animationClass) {
+
+  element.setAttribute("aria-label", element.textContent.trim());
+  element.classList.add(animationClass);
+
+  var index = 0;
+
+  function process(node) {
+
+    if (node.nodeType === 3) {
+
+      var fragment = document.createDocumentFragment();
+
+      Array.from(node.textContent).forEach(function(char) {
+
+        if (char === "\n") {
+          fragment.appendChild(document.createTextNode(char));
+          return;
+        }
+
+        var letter = document.createElement("span");
+
+        letter.className = "letter";
+        letter.setAttribute("aria-hidden", "true");
+        letter.style.setProperty("--i", index++);
+        letter.textContent = char === " " ? "\u00A0" : char;
+
+        fragment.appendChild(letter);
+
+      });
+
+      node.parentNode.replaceChild(fragment, node);
+
+    } else {
+
+      Array.from(node.childNodes).forEach(function(child) {
+        process(child);
+      });
+
+    }
+
+  }
+
+  process(element);
+  }
+  
+/* START LETTER ANIMATIONS */
+
+// HERO TITLE
+document.querySelectorAll(".hero h1 > span").forEach(function(el) {
+  splitLetters(el, "letter-rise");
+});
+
+// SECTION TITLES
+document.querySelectorAll(".section-title").forEach(function(el) {
+  splitLetters(el, "letter-blur");
+});
+
+// HERO HIGHLIGHT
+document.querySelectorAll(".hero-bottom h2").forEach(function(el) {
+  splitLetters(el, "letter-wave");
+});
+  
+  // HERO PARAGRAPH
+document.querySelectorAll(".hero-bottom p").forEach(function(el) {
+  splitLetters(el, "letter-tagline");
+});
+  
+// HERO TAGLINE
+document.querySelectorAll(".hero-bottom p").forEach(function(el) {
+  splitLetters(el, "letter-tagline");
+});
+  
+// CONTACT TEXT
+document.querySelectorAll(".contact-list strong").forEach(function(el) {
+  splitLetters(el, "letter-track");
+});
+
+// ANIMATE WHEN VISIBLE
+var letterTargets = document.querySelectorAll(
+  ".hero h1 > span, .section-title, .hero-bottom h2, hero-bottom p, .contact-list strong"
+);
+
+var letterObserver = new IntersectionObserver(function(entries) {
+
+  entries.forEach(function(entry) {
+
+    if (entry.isIntersecting) {
+      entry.target.classList.add("letters-go");
+      letterObserver.unobserve(entry.target);
+    }
+
+  });
+
+}, { threshold: 0.2 });
+
+letterTargets.forEach(function(el) {
+  letterObserver.observe(el);
+});
+
+/* SCROLL SAFETY */
+
+document.body.style.overflow = "";
+document.documentElement.style.overflowY = "auto";
+
+</script>
+
+</body>
+</html>
