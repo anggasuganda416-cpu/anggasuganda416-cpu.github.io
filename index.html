@@ -1284,7 +1284,7 @@ footer {
       Rhythm, color and sound first.
     </p>
 
-    <button class="reel rv" id="reelBtn" type="button"
+    <div class="reel rv" id="reelBtn" role="button" tabindex="0"
       aria-label="Play showreel">
 
       <div class="frame" id="reelFrame">
@@ -1295,7 +1295,7 @@ footer {
           <span>SP 00:00:00</span>
         </div>
       </div>
-    </button>
+    </div>
 
     <p class="label" style="margin-top:20px">
       CINEMATIC EDITS / AMV / MOTION GRAPHICS / SHORT FORM
@@ -1319,8 +1319,8 @@ footer {
 
     <div class="grid">
 
-      <button class="project rv" type="button"
-        data-video="assets/videos/AMVProject.mp4">
+      <article class="project rv"
+        data-video="AMVProject.mp4">
 
         <div class="frame a1">
           <div class="frame-label">
@@ -1331,10 +1331,10 @@ footer {
 
         <h3>AMV Projects</h3>
         <p>Anime music videos built around beat, transition and character emotion.</p>
-      </button>
+      </article>
 
-      <button class="project rv" type="button"
-        data-video="assets/videos/celenganrindu.mp4">
+      <article class="project rv"
+        data-video="celenganrindu.mp4">
 
         <div class="frame a2">
           <div class="frame-label">
@@ -1345,10 +1345,10 @@ footer {
 
         <h3>Cinematic Edits</h3>
         <p>Story-led cuts with considered color, sound design and pacing.</p>
-      </button>
+      </article>
 
-      <button class="project rv" type="button"
-        data-video="assets/videos/XiQudaxBerulah.mp4">
+      <article class="project rv"
+        data-video="XiQudaxBerulah.mp4">
 
         <div class="frame a3">
           <div class="frame-label">
@@ -1359,10 +1359,10 @@ footer {
 
         <h3>Instagram Reels</h3>
         <p>Vertical, fast and sharp, made to hold attention in seconds.</p>
-      </button>
+      </article>
 
-      <button class="project rv" type="button"
-        data-video="assets/videos/CauseYouHaveTo.mp4">
+      <article class="project rv"
+        data-video="CauseYouHaveTo.mp4">
 
         <div class="frame a4">
           <div class="frame-label">
@@ -1373,10 +1373,10 @@ footer {
 
         <h3>Motion Graphics</h3>
         <p>Titles, typography and animated identity systems.</p>
-      </button>
+      </article>
 
-      <button class="project rv" type="button"
-        data-video="assets/videos/HBDedits.mp4">
+      <article class="project rv"
+        data-video="HBDedits.mp4">
 
         <div class="frame a5">
           <div class="frame-label">
@@ -1387,7 +1387,7 @@ footer {
 
         <h3>Experimental Edits</h3>
         <p>Glitch, tape artifacts and texture, with no brief to follow.</p>
-      </button>
+      </article>
 
     </div>
   </div>
@@ -1410,8 +1410,7 @@ footer {
 
       <figure class="design-card rv">
         <div class="frame d1">
-          <img src="assets/images/Design Opsi 2.png"
-           alt="Poster Design">
+          <img src="desain.png" alt="Poster Design">
     </div>
         <figcaption>
           Poster Design
@@ -1421,7 +1420,7 @@ footer {
 
       <figure class="design-card rv">
         <div class="frame d2">
-          <img src="assets/images/file_0000000035848211b4fc33c5a091097a (1).png"
+          <img src="thumbnail.png" alt="Thumbnail Design">
         </div>
         <figcaption>
           Thumbnail Design
@@ -1431,7 +1430,7 @@ footer {
 
       <figure class="design-card rv">
         <div class="frame d3">
-          <img src="assets/images/file_0000000090f48207894c31c73e3f54f6.png"
+          <img src="pricelist.png" alt="Visual Composition">
         </div>
         <figcaption>
           Visual Composition
@@ -1595,7 +1594,7 @@ if ("IntersectionObserver" in window) {
 
 /* SHOWREEL */
 
-var REEL_URL = "assets/videos/Showreel.mp4";
+var REEL_URL = "Showreel.mp4";
 
 var reelBtn = document.getElementById("reelBtn");
 var reelFrame = document.getElementById("reelFrame");
@@ -1614,6 +1613,10 @@ reelFrame.appendChild(reelVideo);
 reelVideo.play().catch(function() {});
 
 reelBtn.addEventListener("click", function() {
+
+  if (reelVideo.controls) return;
+
+  reelFrame.querySelectorAll(".play,.frame-label").forEach(function(el) { el.style.display = "none"; });
 
   document.querySelectorAll("video").forEach(function(v) {
     v.muted = true;
@@ -1669,6 +1672,8 @@ document.querySelectorAll(".project").forEach(function(item) {
 /* CLICK TO WATCH FULL VIDEO */
 
 frame.addEventListener("click", function() {
+
+  if (video.controls) return;
 
   // Mute semua video lain
   document.querySelectorAll("video").forEach(function(v) {
